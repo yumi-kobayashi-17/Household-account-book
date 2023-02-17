@@ -13,7 +13,7 @@
     "fmt:preCommit": "prettier"
   },
   "lint-staged": {
-    "src/**/*.{ts,tsx}": "npm run lint:preCommit",
+    "src/**/*.{ts,tsx,vue}": "npm run lint:preCommit",
     "src/**/*.{js,jsx,ts,tsx,json,css,scss,vue}": "npm run fmt:preCommit"
   },
   "husky": {
