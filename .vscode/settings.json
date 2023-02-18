@@ -1,6 +1,6 @@
 {
   "eslint.run": "onSave",
-  "eslint.validate": ["typescriptreact"],
+  "eslint.validate": ["vue"],
   "eslint.workingDirectories": [{ "mode": "auto" }],
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
