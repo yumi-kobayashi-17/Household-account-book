@@ -14,9 +14,9 @@ module.exports = {
     complexity: ['error', 4],
     'default-case': 'error',
     'import/order': 'off',
-    'max-depth': ['error', 1],
+    'max-depth': ['error', 3],
     'max-nested-callbacks': ['error', 3],
-    'max-lines': ['error', 200],
+    'max-lines': ['error', 300],
     'no-console': 'error',
     'no-param-reassign': 'error',
     'object-shorthand': [
