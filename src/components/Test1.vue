@@ -1,12 +1,34 @@
-<script setup lang="ts">
-  const props = defineProps<{
-    msg: string;
-  }>();
+<script lang="ts">
+  import { defineComponent } from 'vue';
+  import type { PropType } from 'vue';
+  export default defineComponent({
+    props: {
+      count: {
+        type: Number,
+        required: true,
+      },
+      msg: {
+        type: String,
+        required: true,
+      },
+      setCount: {
+        type: Function as PropType<(arg: number) => number>,
+        required: true,
+      },
+    },
+    setup(props) {
+      return { props };
+    },
+  });
 </script>
 
 <template>
   <div>
-    {{ props.msg }}
+    <h1>
+      {{ props.msg }}
+    </h1>
+    <h1>{{ props.count }}</h1>
+    <button @click="() => props.setCount(props.count + 1)">add Test1</button>
   </div>
 </template>
 
