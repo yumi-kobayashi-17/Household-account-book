@@ -7,9 +7,13 @@
 </script>
 
 <template>
-  <div>Hello,World</div>
-  <Test1 msg="Test1" :count="countTest1" :set-count="setCountTest1" />
-  <Test2 msg="Test2" />
+  <div class="flex flex-col">
+    <div class="text-5xl text-bold bg-red-500">Hello,World</div>
+    <div>
+      <Test1 msg="Test1" :count="countTest1" :set-count="setCountTest1" />
+      <Test2 msg="Test2" />
+    </div>
+  </div>
 </template>
 
 <style scoped></style>

@@ -28,7 +28,7 @@
       {{ props.msg }}
     </h1>
     <h1>{{ props.count }}</h1>
-    <button @click="() => props.setCount(props.count + 1)">add Test1</button>
+    <button class="bg-orange-400" @click="() => props.setCount(props.count + 1)">add Test1</button>
   </div>
 </template>
 

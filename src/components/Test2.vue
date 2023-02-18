@@ -1,7 +1,17 @@
-<script setup lang="ts">
-  const props = defineProps<{
-    msg: string;
-  }>();
+<script lang="ts">
+  import { defineComponent } from '@vue/runtime-core';
+
+  export default defineComponent({
+    props: {
+      msg: {
+        type: String,
+        required: true,
+      },
+    },
+    setup(props) {
+      return { props };
+    },
+  });
 </script>
 
 <template>
