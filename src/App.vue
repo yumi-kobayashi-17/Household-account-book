@@ -4,8 +4,7 @@
 
 <template>
   <div class="flex flex-col">
-    <!-- <div class="text-5xl text-bold bg-red-500">test</div> -->
-    <HouseholdMain msg="Hello Vue!"></HouseholdMain>
+    <HouseholdMain></HouseholdMain>
   </div>
 </template>
 

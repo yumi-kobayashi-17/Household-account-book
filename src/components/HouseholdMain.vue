@@ -1,104 +1,46 @@
 <script lang="ts">
-  // import Form from '@/components/Form.vue';
-  // import Table from '@/components/Table.vue';
+  import Form from '@/components/Form.vue';
+  import Table from '@/components/Table.vue';
   import { defineComponent } from '@vue/runtime-core';
-  // import type { PropType } from 'vue';
 
   export default defineComponent({
-    props: {
-      msg: {
-        type: String,
-        required: true,
-      },
+    components: {
+      Form,
+      Table,
     },
     setup(props) {
       return { props };
     },
+    data() {
+      return {
+        isActive: 1,
+      };
+    },
+    methods: {
+      change(num: number) {
+        this.isActive = num;
+      },
+    },
   });
-
-  //変数定義
-  // const formMessage = '';
-  // const tableMessage = '';
 </script>
 
 <template>
-  <div class="container">
-    <div class="flex">
-      <div>
-        <p>入力フォーム</p>
-      </div>
-      <div>
-        <p>結果</p>
-      </div>
+  <div class="flex font-sans">
+    <div class="w-1/5 h-full px-3 py-4 fixed top-0 left-0 bg-red-100">
+      <nav class="text-center">
+        <button class="text-2xl" @click="change(1)">入力フォーム</button><br />
+        <button class="text-2xl" @click="change(2)">結果</button>
+      </nav>
     </div>
-    <div class="body">
-      <form action="">
-        <input type="text" class="textline" />
-      </form>
-      <table>
-        <tr>
-          <th>日付</th>
-          <th>支出1</th>
-          <th>支出2</th>
-          <th>支出3</th>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>100</td>
-          <td>1000</td>
-          <td>2000</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>3000</td>
-          <td>3000</td>
-          <td>3000</td>
-        </tr>
-        <tr>
-          <td>4</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-        </tr>
-      </table>
+    <div class="body px-3 py-4 fixed top-0">
+      <div class="text-center" v-if="isActive === 1">
+        <Form formMessage="formMessage"></Form>
+      </div>
+      <div class="text-center" v-else-if="isActive === 2">
+        <Table tableMessage="tableMessage"></Table>
+      </div>
     </div>
   </div>
 </template>
 
-<style scoped>
-  .container {
-    display: flex;
-  }
-  .flex {
-    width: 20%;
-    height: 1000px;
-    background-color: antiquewhite;
-    text-align: center;
-    flex-direction: column;
-  }
-
-  .body {
-    width: 80%;
-    text-align: center;
-    background-color: aqua;
-  }
-  .textline {
-    border: solid;
-    margin-bottom: 20px;
-  }
-
-  table {
-    margin: auto;
-  }
-  tr,
-  th,
-  td {
-    border: 1px solid;
-  }
-</style>
+<style scoped></style>
