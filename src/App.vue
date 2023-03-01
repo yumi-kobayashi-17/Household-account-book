@@ -4,7 +4,7 @@
 
 <template>
   <div class="flex flex-col">
-    <HouseholdMain></HouseholdMain>
+    <HouseholdMain />
   </div>
 </template>
 

@@ -3,7 +3,10 @@
 
   export default defineComponent({
     props: {
-      formMessage: String,
+      formMessage: {
+        type: String,
+        required: true,
+      },
     },
     setup(props) {
       return { props };
@@ -13,7 +16,7 @@
 
 <template>
   <span class="text-cyan-500">{{ props.formMessage }}</span>
-  <form action="">
+  <form>
     <input type="text" class="border-solid border-2 border-black rounded-lg" />
   </form>
 </template>
