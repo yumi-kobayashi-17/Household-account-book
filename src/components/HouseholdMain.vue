@@ -27,26 +27,34 @@
         [5, '木'],
         [6, '金'],
       ]);
-      const dateList = dates.map((date, index) => ({ date, day: days.get(index % 7) ?? '' }));
+      const tableColorClass = new Map([
+        [0, 'bg-red-100'],
+        [1, 'bg-orange-100'],
+        [2, 'bg-yellow-100'],
+        [3, 'bg-green-100'],
+        [4, 'bg-sky-100'],
+        [5, 'bg-purple-100'],
+        [6, 'bg-rose-100'],
+      ]);
+
+      const dateList = dates.map((date, index) => ({
+        date,
+        day: days.get(index % 7),
+        tableClass: tableColorClass.get(index % 7) ?? '',
+      }));
 
       const selectDate = ref<number>(1);
       const costTypes = [
-        { id: 1, item: 'foodCost' },
-        { id: 2, item: 'fixedCost' },
+        { id: 1, item: '食費' },
+        { id: 2, item: '固定費' },
       ];
       const selectCostType = ref<number>(costTypes[0].id);
       const cost = ref<number>();
-      type paymentsDataType = {
-        date: number;
-        day: string;
-        cost: {
-          foodCost: number | null;
-          fixedCost: number | null;
-        };
-      };
-      const paymentsData: paymentsDataType[] = dateList.map((elm) => ({
+
+      const paymentsData: PaymentsDataType[] = dateList.map((elm) => ({
         date: elm.date,
         day: elm.day,
+        tableClass: elm.tableClass,
         cost: { foodCost: null, fixedCost: null },
       }));
 
@@ -88,6 +96,26 @@
       };
     },
   });
+
+  export type DateList = {
+    date: number;
+    day: string;
+  }[];
+
+  export type CostTypes = {
+    id: number;
+    item: string;
+  }[];
+
+  export type PaymentsDataType = {
+    date: number;
+    day: string;
+    tableClass: string;
+    cost: {
+      foodCost: number | null;
+      fixedCost: number | null;
+    };
+  };
 </script>
 
 <template>
@@ -108,12 +136,12 @@
           :select-cost-type="selectCostType"
           :set-payment="setPayment"
           :cost="cost"
+          :payments-data="paymentsData"
         />
       </div>
       <div class="text-center" v-else-if="isActive === 2">
         <Table
           :tableMessage="tableMessage"
-          :date-list="dateList"
           :select-date="selectDate"
           :select-cost-type="selectCostType"
           :set-date="setDate"

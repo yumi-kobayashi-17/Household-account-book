@@ -2,6 +2,7 @@
   import { defineComponent } from '@vue/runtime-core';
   import { ref } from 'vue';
   import type { PropType } from 'vue';
+  import type { PaymentsDataType, CostTypes } from '@/components/HouseholdMain.vue';
 
   export default defineComponent({
     props: {
@@ -9,16 +10,12 @@
         type: String,
         required: true,
       },
-      dateList: {
-        type: Object,
-        required: true,
-      },
       selectDate: {
         type: Number,
         required: true,
       },
       costTypes: {
-        type: Object,
+        type: Array as PropType<CostTypes>,
         required: true,
       },
       selectCostType: {
@@ -27,6 +24,10 @@
       },
       cost: {
         type: Number,
+        required: true,
+      },
+      paymentsData: {
+        type: Array as PropType<PaymentsDataType[]>,
         required: true,
       },
       setPayment: {
@@ -57,11 +58,10 @@
         <option value="4">4</option>
       </select>
       <select v-model="currentDate" class="border-2 border-slate-500 mr-3" name="date">
-        <option :value="date" v-for="date in dateList.length">{{ date }}</option>
+        <option :value="date" v-for="date in paymentsData.length">{{ date }}</option>
       </select>
       <select v-model="currentCostType" class="border-2 border-slate-500" name="costType">
-        <option :value="costTypes[0].id">食費</option>
-        <option :value="costTypes[1].id">固定費</option>
+        <option :value="costType.id" v-for="costType in costTypes">{{ costType.item }}</option>
       </select>
     </div>
     <div class="flex flex-row pt-6">

@@ -1,16 +1,13 @@
 <script lang="ts">
   import { defineComponent } from '@vue/runtime-core';
-  import { ref,computed } from 'vue';
+  // import { ref } from 'vue';
   import type { PropType } from 'vue';
+  import type { PaymentsDataType } from '@/components/HouseholdMain.vue';
 
   export default defineComponent({
     props: {
       tableMessage: {
         type: String,
-        required: true,
-      },
-      dateList: {
-        type: Object,
         required: true,
       },
       selectDate: {
@@ -21,8 +18,8 @@
         type: Number,
         required: true,
       },
-      paymentsData:{
-        type: Object,
+      paymentsData: {
+        type: Array as PropType<PaymentsDataType[]>,
         required: true,
       },
       setDate: {
@@ -32,11 +29,6 @@
     },
 
     setup(props) {
-
-    //   const colorClass: string[] = ['bg-red-200','bg-orange-200','bg-yellow-200','bg-green-200','bg-sky-200','bg-purple-200','bg-rose-200']
-    // const tableClass = computed(() => {
-    //   return colorClass[]
-    // });
       return { props };
     },
   });
@@ -45,35 +37,24 @@
 <template>
   <div class="flex flex-col">
     <div>
-      <!-- <p>{{ tableClass }}</p> -->
       <span class="text-pink-500">{{ props.tableMessage }}</span>
     </div>
     <div>
       <table class="border-4 table-fixed">
-        <th>
-          <th class="pr-5 bg-slate-100 border-2">日付</th>
-          <tr v-for="d in dateList" class="border-2">
-            <td><button @click="setDate(d.date)">{{ d.date }}</button></td>
-          </tr>
-        </th>
-        <th>
-          <th class="pr-5 bg-slate-100 border-2">曜日</th>
-          <tr v-for="d in dateList" class="border-2" >
-            <td>{{ d.day }}</td>
-          </tr>
-        </th>
-        <th>
-          <th class="pr-28 bg-slate-100 border-2">食費</th>
-          <tr v-for="payment in paymentsData" class="border-2 w-36 h-7">
-            <td>{{ payment.cost.foodCost }}</td>
-          </tr>
-        </th>
-        <th>
-          <th class="pr-28 bg-slate-100 border-2">固定費</th>
-          <tr v-for="payment in paymentsData" class="border-2 w-36 h-7">
-            <td>{{ payment.cost.fixedCost }}</td>
-          </tr>
-        </th>
+        <tr class="pr-5 bg-slate-100 border-2">
+          <th class="pr-5">日付</th>
+          <th class="pr-5">曜日</th>
+          <th class="pr-20">食費</th>
+          <th class="pr-20">固定費</th>
+        </tr>
+        <tr v-for="p in paymentsData" class="border-2" :class="p.tableClass">
+          <td>
+            <button @click="setDate(p.date)" class="pr-5">{{ p.date }}</button>
+          </td>
+          <td class="pr-5">{{ p.day }}</td>
+          <td class="pr-20">{{ p.cost.foodCost }}</td>
+          <td class="pr-20">{{ p.cost.fixedCost }}</td>
+        </tr>
       </table>
     </div>
   </div>
