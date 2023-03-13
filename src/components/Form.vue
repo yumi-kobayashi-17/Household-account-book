@@ -2,7 +2,7 @@
   import { defineComponent } from '@vue/runtime-core';
   import { ref } from 'vue';
   import type { PropType } from 'vue';
-  import type { PaymentsDataType, CostTypes } from '@/components/HouseholdMain.vue';
+  import type { PaymentsDataType, CostTypes } from '@/types/util';
 
   export default defineComponent({
     props: {
@@ -15,7 +15,7 @@
         required: true,
       },
       costTypes: {
-        type: Array as PropType<CostTypes>,
+        type: Array as PropType<CostTypes[]>,
         required: true,
       },
       selectCostType: {

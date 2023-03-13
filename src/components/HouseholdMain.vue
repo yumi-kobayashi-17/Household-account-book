@@ -3,6 +3,7 @@
   import Table from '@/components/Table.vue';
   import { defineComponent } from '@vue/runtime-core';
   import { ref } from 'vue';
+  import type { Days, CostTypes, PaymentsDataType } from '@/types/util';
 
   export default defineComponent({
     components: {
@@ -18,33 +19,24 @@
         isActive.value = num;
       };
       const dates: number[] = [...Array(30)].map((_, i) => i + 1);
-      const days = new Map([
-        [0, '土'],
-        [1, '日'],
-        [2, '月'],
-        [3, '火'],
-        [4, '水'],
-        [5, '木'],
-        [6, '金'],
-      ]);
-      const tableColorClass = new Map([
-        [0, 'bg-red-100'],
-        [1, 'bg-orange-100'],
-        [2, 'bg-yellow-100'],
-        [3, 'bg-green-100'],
-        [4, 'bg-sky-100'],
-        [5, 'bg-purple-100'],
-        [6, 'bg-rose-100'],
-      ]);
+      const days: Days[] = [
+        { id: 0, day: '土', style: 'bg-red-100' },
+        { id: 1, day: '日', style: 'bg-orange-100' },
+        { id: 2, day: '月', style: 'bg-yellow-100' },
+        { id: 3, day: '火', style: 'bg-green-100' },
+        { id: 4, day: '水', style: 'bg-sky-100' },
+        { id: 5, day: '木', style: 'bg-purple-100' },
+        { id: 6, day: '金', style: 'bg-rose-100' },
+      ];
 
       const dateList = dates.map((date, index) => ({
         date,
-        day: days.get(index % 7),
-        tableClass: tableColorClass.get(index % 7) ?? '',
+        day: days.find((elm) => elm.id === index % 7)?.day,
+        tableClass: days.find((elm) => elm.id === index % 7)?.style,
       }));
 
       const selectDate = ref<number>(1);
-      const costTypes = [
+      const costTypes: CostTypes[] = [
         { id: 1, item: '食費' },
         { id: 2, item: '固定費' },
       ];
@@ -96,26 +88,6 @@
       };
     },
   });
-
-  export type DateList = {
-    date: number;
-    day: string;
-  }[];
-
-  export type CostTypes = {
-    id: number;
-    item: string;
-  }[];
-
-  export type PaymentsDataType = {
-    date: number;
-    day: string;
-    tableClass: string;
-    cost: {
-      foodCost: number | null;
-      fixedCost: number | null;
-    };
-  };
 </script>
 
 <template>

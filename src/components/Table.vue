@@ -2,7 +2,7 @@
   import { defineComponent } from '@vue/runtime-core';
   // import { ref } from 'vue';
   import type { PropType } from 'vue';
-  import type { PaymentsDataType } from '@/components/HouseholdMain.vue';
+  import type { PaymentsDataType } from '@/types/util';
 
   export default defineComponent({
     props: {
