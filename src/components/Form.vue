@@ -4,6 +4,7 @@
   import type { PropType } from 'vue';
   import type { PaymentsDataType, CostTypes } from '@/types/util';
   import { useTableStore } from '@/stores/table';
+  import { pinia } from '../stores/index';
   // import { storeToRef } from 'pinia';
 
   export default defineComponent({
@@ -48,7 +49,7 @@
     },
   });
 
-  const tableStore = useTableStore();
+  const tableStore = useTableStore(pinia);
   console.log(tableStore.formMessage);
   tableStore.serMessage('hello!');
   console.log(tableStore.formMessage);
