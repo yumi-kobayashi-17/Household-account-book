@@ -11,7 +11,7 @@
       Table,
     },
     setup(props) {
-      const formMessage = ref('formMessage');
+      // const formMessage = ref('formMessage');
       const tableMessage = ref('4月');
       const isActive = ref(1);
       const pageId = { formPage: 1, tablePage: 2 };
@@ -80,7 +80,7 @@
         costTypes,
         selectCostType,
         cost,
-        formMessage,
+        // formMessage,
         tableMessage,
         setDate,
         setPayment,
@@ -101,7 +101,6 @@
     <div class="flex justify-center w-4/5 h-screen px-3 py-4 fixed top-0 right-0 overflow-y-scroll">
       <div class="text-center" v-if="isActive === 1">
         <Form
-          :formMessage="formMessage"
           :date-list="dateList"
           :select-date="selectDate"
           :costTypes="costTypes"

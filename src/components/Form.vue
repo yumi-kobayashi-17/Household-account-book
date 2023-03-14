@@ -3,6 +3,8 @@
   import { ref } from 'vue';
   import type { PropType } from 'vue';
   import type { PaymentsDataType, CostTypes } from '@/types/util';
+  import { useTableStore } from '@/stores/table';
+  // import { storeToRef } from 'pinia';
 
   export default defineComponent({
     props: {
@@ -45,11 +47,16 @@
       return { props, selectedYear, selectedMonth, currentDate, currentCost, currentCostType };
     },
   });
+
+  const tableStore = useTableStore();
+  console.log(tableStore.formMessage);
+  tableStore.serMessage('hello!');
+  console.log(tableStore.formMessage);
 </script>
 
 <template>
   <div class="flex flex-col">
-    <span class="text-cyan-500">{{ props.formMessage }}</span>
+    <!-- <span class="text-cyan-500">{{ props.formMessage }}</span> -->
     <div class="pt-6">
       <select class="border-2 border-slate-500 mr-3" name="year">
         <option value="2023">2023</option>
