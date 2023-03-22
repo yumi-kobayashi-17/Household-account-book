@@ -4,8 +4,7 @@
   import type { PropType } from 'vue';
   import type { PaymentsDataType, CostTypes } from '@/types/util';
   import { useTableStore } from '@/stores/table';
-  import { pinia } from '../stores/index';
-  // import { storeToRef } from 'pinia';
+  import { pinia } from '@/stores/index';
 
   export default defineComponent({
     props: {
@@ -13,51 +12,48 @@
         type: String,
         required: true,
       },
-      selectDate: {
-        type: Number,
-        required: true,
-      },
-      costTypes: {
-        type: Array as PropType<CostTypes[]>,
-        required: true,
-      },
-      selectCostType: {
-        type: Number,
-        required: true,
-      },
-      cost: {
-        type: Number,
-        required: true,
-      },
-      paymentsData: {
-        type: Array as PropType<PaymentsDataType[]>,
-        required: true,
-      },
-      setPayment: {
-        type: Function as PropType<(arg1: number, arg2: number, arg3: number) => void>,
-        required: true,
-      },
+      // selectDate: {
+      //   type: Number,
+      //   required: true,
+      // },
+      // costTypes: {
+      //   type: Array as PropType<CostTypes[]>,
+      //   required: true,
+      // },
+      // selectCostType: {
+      //   type: Number,
+      //   required: true,
+      // },
+      // cost: {
+      //   type: Number,
+      //   required: true,
+      // },
+      // paymentsData: {
+      //   type: Array as PropType<PaymentsDataType[]>,
+      //   required: true,
+      // },
+      // setPayment: {
+      //   type: Function as PropType<(arg1: number, arg2: number, arg3: number) => void>,
+      //   required: true,
+      // },
     },
     setup(props) {
+      const tableStore = useTableStore(pinia);
+
       const selectedYear = ref<number>(2023);
       const selectedMonth = ref<number>(4);
-      const currentDate = ref(props.selectDate);
-      const currentCost = ref(props.cost);
-      const currentCostType = ref(props.selectCostType);
+      const currentDate = ref(tableStore.selectDate);
+      const currentCost = ref(tableStore.cost);
+      const currentCostType = ref(tableStore.selectCostType);
 
-      return { props, selectedYear, selectedMonth, currentDate, currentCost, currentCostType };
+      return { props, selectedYear, selectedMonth, currentDate, currentCost, currentCostType, tableStore };
     },
   });
-
-  const tableStore = useTableStore(pinia);
-  console.log(tableStore.formMessage);
-  tableStore.serMessage('hello!');
-  console.log(tableStore.formMessage);
 </script>
 
 <template>
   <div class="flex flex-col">
-    <!-- <span class="text-cyan-500">{{ props.formMessage }}</span> -->
+    <span class="text-cyan-500">{{ props.formMessage }}</span>
     <div class="pt-6">
       <select class="border-2 border-slate-500 mr-3" name="year">
         <option value="2023">2023</option>
@@ -66,10 +62,10 @@
         <option value="4">4</option>
       </select>
       <select v-model="currentDate" class="border-2 border-slate-500 mr-3" name="date">
-        <option :value="date" v-for="date in paymentsData.length">{{ date }}</option>
+        <option :value="date" v-for="date in tableStore.paymentsData.length">{{ date }}</option>
       </select>
       <select v-model="currentCostType" class="border-2 border-slate-500" name="costType">
-        <option :value="costType.id" v-for="costType in costTypes">{{ costType.item }}</option>
+        <option :value="costType.id" v-for="costType in tableStore.costTypes">{{ costType.item }}</option>
       </select>
     </div>
     <div class="flex flex-row pt-6">
@@ -78,7 +74,7 @@
       </form>
       <div>
         <button
-          @click="props.setPayment(currentDate, currentCostType, currentCost)"
+          @click="tableStore.setPayment(currentDate, currentCostType, currentCost)"
           class="font-medium bg-cyan-200 hover:bg-cyan-300 rounded-lg px-4"
         >
           追加
