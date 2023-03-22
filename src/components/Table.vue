@@ -1,8 +1,5 @@
 <script lang="ts">
   import { defineComponent } from '@vue/runtime-core';
-  // import { ref } from 'vue';
-  import type { PropType } from 'vue';
-  import type { PaymentsDataType } from '@/types/util';
   import { useTableStore } from '@/stores/table';
   import { pinia } from '@/stores/index';
 
@@ -12,22 +9,6 @@
         type: String,
         required: true,
       },
-      // selectDate: {
-      //   type: Number,
-      //   required: true,
-      // },
-      // selectCostType: {
-      //   type: Number,
-      //   required: true,
-      // },
-      // paymentsData: {
-      //   type: Array as PropType<PaymentsDataType[]>,
-      //   required: true,
-      // },
-      // setDate: {
-      //   type: Function as PropType<(arg: number) => void>,
-      //   required: true,
-      // },
     },
 
     setup(props) {

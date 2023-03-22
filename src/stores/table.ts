@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import type { Days, CostTypes, PaymentsDataType } from '@/types/util';
+import type { Days, CostTypes } from '@/types/util';
 
 interface State {
   isActive: number;
