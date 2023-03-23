@@ -1,8 +1,7 @@
 <script lang="ts">
   import { defineComponent } from '@vue/runtime-core';
-  // import { ref } from 'vue';
-  import type { PropType } from 'vue';
-  import type { PaymentsDataType } from '@/types/util';
+  import { useTableStore } from '@/stores/table';
+  import { pinia } from '@/stores/index';
 
   export default defineComponent({
     props: {
@@ -10,26 +9,11 @@
         type: String,
         required: true,
       },
-      selectDate: {
-        type: Number,
-        required: true,
-      },
-      selectCostType: {
-        type: Number,
-        required: true,
-      },
-      paymentsData: {
-        type: Array as PropType<PaymentsDataType[]>,
-        required: true,
-      },
-      setDate: {
-        type: Function as PropType<(arg: number) => void>,
-        required: true,
-      },
     },
 
     setup(props) {
-      return { props };
+      const tableStore = useTableStore(pinia);
+      return { props, tableStore };
     },
   });
 </script>
@@ -47,9 +31,9 @@
           <th class="pr-20">食費</th>
           <th class="pr-20">固定費</th>
         </tr>
-        <tr v-for="p in paymentsData" class="border-2" :class="p.tableClass">
+        <tr v-for="p in tableStore.paymentsData" class="border-2" :class="p.tableClass">
           <td>
-            <button @click="setDate(p.date)" class="pr-5">{{ p.date }}</button>
+            <button @click="tableStore.setDate(p.date)" class="pr-5">{{ p.date }}</button>
           </td>
           <td class="pr-5">{{ p.day }}</td>
           <td class="pr-20">{{ p.cost.foodCost }}</td>
