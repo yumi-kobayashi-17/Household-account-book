@@ -51,7 +51,7 @@ export const useTableStore = defineStore({
           date: elm.date,
           day: elm.day,
           tableClass: elm.tableClass,
-          cost: { foodCost: null, fixedCost: null },
+          cost: { foodCost: 0, fixedCost: 0 },
         }));
     },
   },
@@ -68,9 +68,9 @@ export const useTableStore = defineStore({
     },
     setCost(addedCost: number): void {
       if (this.selectCostType === this.costTypes[0].id) {
-        this.paymentsData[this.selectDate - 1].cost.foodCost = addedCost;
+        this.paymentsData[this.selectDate - 1].cost.foodCost += addedCost;
       } else if (this.selectCostType === this.costTypes[1].id) {
-        this.paymentsData[this.selectDate - 1].cost.fixedCost = addedCost;
+        this.paymentsData[this.selectDate - 1].cost.fixedCost += addedCost;
       }
     },
     setPayment(selectedDate: number, selectedCostType: number, addedCost: number): void {
